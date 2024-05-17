@@ -8,79 +8,97 @@ symbols = '!@#$%^&*?'
 
 # -----------------------------------------------------------------------------------
 #  Encryption 
-def ceaser_Cipher_Encrypt_Algorithm(letters , rotatenum):
+def ceaser_Cipher_Encrypt_Algorithm(letter , shiftNum):
     try:
-        if(letters==' '):
-            newcode = random.choice(symbols)
-            return(newcode)
-        elif(letters in numeric):
-            numericIndex = numeric.find(letters)
-            if(numericIndex+rotatenum >len(numeric)-1):
-                errorcontrol = (numericIndex + rotatenum) - (len(numeric)-1)
-                newcode = numeric[errorcontrol-1]
-                return(newcode)
-            else:
-                newcode= numeric[numericIndex+rotatenum]
-                return(newcode)
-        elif(letters in capitalAlphabets):
-            letterIndex =capitalAlphabets.find(letters)
-            if(letterIndex+rotatenum > len(capitalAlphabets)-1):
-                errorcontrol = (letterIndex+rotatenum) - (len(capitalAlphabets)-1)
-                newcode=capitalAlphabets[errorcontrol-1]
-                return(newcode)
-            else:
-                newcode=capitalAlphabets[letterIndex+rotatenum]
-                return(newcode)
-        else:
-            letterIndex = lowerAlphabets.find(letters)
-            if(letterIndex+rotatenum > len(lowerAlphabets)-1):
-                errorcontrol = (letterIndex+rotatenum) - (len(lowerAlphabets)-1)
-                newcode=lowerAlphabets[errorcontrol-1]
-                return(newcode)
+        # handling spaces
+        if(letter==' '):
+            ReplaceText = random.choice(symbols)
+            return(ReplaceText)
+        
+        elif(letter in numeric):
 
+            numericIndex = numeric.find(letter)
+            numericLength = len(numeric)-1
+
+            if(numericIndex+shiftNum > numericLength):
+                errorcontrol = (numericIndex + shiftNum) - numericLength
+                ReplaceText = numeric[errorcontrol-1]
+                return(ReplaceText)
             else:
-                newcode = lowerAlphabets[letterIndex+rotatenum]
-                return(newcode)
+                ReplaceText= numeric[numericIndex+shiftNum]
+                return(ReplaceText)
+        
+        # handing capital letters
+        elif(letter in capitalAlphabets):
+
+            letterIndex = capitalAlphabets.find(letter)
+            capitalLength = len(capitalAlphabets)-1
+
+            if(letterIndex+shiftNum > capitalLength):
+                errorcontrol = (letterIndex+shiftNum) - (capitalLength)
+                ReplaceText=capitalAlphabets[errorcontrol-1]
+                return(ReplaceText)
+            else:
+                ReplaceText=capitalAlphabets[letterIndex+shiftNum]
+                return(ReplaceText)
+            
+        # handling lower letters
+        else:
+
+            letterIndex = lowerAlphabets.find(letter)
+            lowerLength = len(lowerAlphabets)-1
+
+            if(letterIndex+shiftNum > lowerLength):
+                errorcontrol = (letterIndex+shiftNum) - lowerLength
+                ReplaceText=lowerAlphabets[errorcontrol-1]
+                return(ReplaceText)
+            else:
+                ReplaceText = lowerAlphabets[letterIndex+shiftNum]
+                return(ReplaceText)
+            
     except Exception as e:
         return e
 
 
-def ceaser_Cipher_Encript(encriptText , shiftnum):
+def ceaser_Cipher_Encript(encriptText , shiftNum):
     try:
-        mainlist = [ceaser_Cipher_Encrypt_Algorithm(encriptletters,shiftnum) for encriptletters in encriptText ]
-        return(''.join(mainlist))
-    except:
-        print(ceaser_Cipher_Encrypt_Algorithm)
+        encriptedList = [ceaser_Cipher_Encrypt_Algorithm(letter,shiftNum) for letter in encriptText ]
+        return(''.join(encriptedList))
+    except Exception as e:
+        print(e)
+        
 
 
 
 
 # ---------------------------------------------------------------
 # Decription  
-def ceaser_Cipher_Decrypt_Algorithm(letters , rotatenum):
-    if(letters in symbols):
-        newcode = ' '
-        return(newcode)
+def ceaser_Cipher_Decrypt_Algorithm(letter , shiftNum):
+    if(letter in symbols):
+        ReplaceText = ' '
+        return(ReplaceText)
 
-    elif(letters in numeric):
-        numericIndex = numeric.find(letters)
-        newcode= numeric[numericIndex-rotatenum]
-        return(newcode)
-    elif(letters in capitalAlphabets):
-        letterIndex = capitalAlphabets.find(letters)
-        newcode = capitalAlphabets[letterIndex-rotatenum]
-        return(newcode)
+    elif(letter in numeric):
+        numericIndex = numeric.find(letter)
+        ReplaceText= numeric[numericIndex-shiftNum]
+        return(ReplaceText)
+    elif(letter in capitalAlphabets):
+        letterIndex = capitalAlphabets.find(letter)
+        ReplaceText = capitalAlphabets[letterIndex-shiftNum]
+        return(ReplaceText)
         
     else:
-        letterIndex = lowerAlphabets.find(letters)
-        newcode = lowerAlphabets[letterIndex-rotatenum]
-        return(newcode)
+        letterIndex = lowerAlphabets.find(letter)
+        ReplaceText = lowerAlphabets[letterIndex-shiftNum]
+        return(ReplaceText)
 
 def ceaser_Cipher_Decrypt(decriptText , shiftnum):
     try:
-        mainlist = [ceaser_Cipher_Decrypt_Algorithm(decriptletters,shiftnum) for decriptletters in decriptText ]
+        mainlist = [ceaser_Cipher_Decrypt_Algorithm(letter,shiftnum) for letter in decriptText ]
         return(''.join(mainlist))
-    except:
-        print(ceaser_Cipher_Decrypt_Algorithm)
+    except Exception as e:
+        print(e)
+        
 
 
+print(ceaser_Cipher_Encript('1234567890' , 2))
