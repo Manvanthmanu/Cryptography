@@ -1,5 +1,7 @@
 import random
 
+__all__ = ["ceaser_Cipher_Decrypt" , "ceaser_Cipher_Encript"]
+
 lowerAlphabets = "abcdefghijklmnopqrstuvwxyz"
 capitalAlphabets = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 numeric = '0123456789'
@@ -7,8 +9,9 @@ symbols = '!@#$%^&*?'
 
 
 # -----------------------------------------------------------------------------------
+
 #  Encryption 
-def ceaser_Cipher_Encrypt_Algorithm(letter , shiftNum):
+def __ceaser_Cipher_Encrypt_Algorithm(letter , shiftNum):
     try:
         # handling spaces
         if(letter==' '):
@@ -62,7 +65,7 @@ def ceaser_Cipher_Encrypt_Algorithm(letter , shiftNum):
 
 def ceaser_Cipher_Encript(encriptText , shiftNum):
     try:
-        encriptedList = [ceaser_Cipher_Encrypt_Algorithm(letter,shiftNum) for letter in encriptText ]
+        encriptedList = [__ceaser_Cipher_Encrypt_Algorithm(letter,shiftNum) for letter in encriptText ]
         return(''.join(encriptedList))
     except Exception as e:
         print(e)
@@ -73,7 +76,7 @@ def ceaser_Cipher_Encript(encriptText , shiftNum):
 
 # ---------------------------------------------------------------
 # Decription  
-def ceaser_Cipher_Decrypt_Algorithm(letter , shiftNum):
+def __ceaser_Cipher_Decrypt_Algorithm(letter , shiftNum):
     if(letter in symbols):
         ReplaceText = ' '
         return(ReplaceText)
@@ -94,11 +97,13 @@ def ceaser_Cipher_Decrypt_Algorithm(letter , shiftNum):
 
 def ceaser_Cipher_Decrypt(decriptText , shiftnum):
     try:
-        mainlist = [ceaser_Cipher_Decrypt_Algorithm(letter,shiftnum) for letter in decriptText ]
+        mainlist = [__ceaser_Cipher_Decrypt_Algorithm(letter,shiftnum) for letter in decriptText ]
         return(''.join(mainlist))
     except Exception as e:
         print(e)
         
 
 
-print(ceaser_Cipher_Encript('1234567890' , 2))
+
+if __name__ == "__main__":
+    print(ceaser_Cipher_Encript('1234567890' , 2))
